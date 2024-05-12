@@ -129,7 +129,7 @@ function ReviewGrid() {
   return (
     <div
       ref={containerRef}
-      className="relative -mx-4 mt-16 grid h-[49rem] max-h-[150vh] grid-cols-1 items-start gap-8 overflow-hidden px-4 sm:mt-20 md:grid-cols-2 lg:grid-cols-3"
+      className="relative mt-10  grid h-[49rem] max-h-[150vh] grid-cols-1 items-start gap-8 overflow-hidden px-4 sm:mt-20 md:grid-cols-2 lg:grid-cols-3"
     >
       {isInView ? (
         <>
@@ -158,8 +158,8 @@ function ReviewGrid() {
           />
         </>
       ) : null}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-slate-100"></div>
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-100"></div>
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-52 bg-gradient-to-b from-slate-100" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-300" />
     </div>
   );
 }
@@ -170,7 +170,7 @@ export function Reviews() {
       <img
         aria-hidden="true"
         src="/what-people-are-buying.png"
-        className="absolute select-none hideen xl:block -left-32 top-1/3"
+        className="absolute select-none hidden xl:block -left-32 top-1/3"
       />
       <ReviewGrid />
     </MaxWidthWrapper>
