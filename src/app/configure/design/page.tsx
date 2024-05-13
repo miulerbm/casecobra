@@ -1,7 +1,40 @@
-const Page = async () => {
-  // make a db call, it doens't happen on the client, it happens on the sv.
-  // we need a way to access our db.
-  return <p></p>;
+import { db } from "@/db";
+import { notFound } from "next/navigation";
+import DesignConfigurator from "./DesignConfigurator";
+
+interface PageProps {
+  searchParams: {
+    [key: string]: string | string[] | undefined;
+  };
+}
+
+const Page = async ({ searchParams }: PageProps) => {
+  //obtaining the id from the url params
+  const { id } = searchParams;
+
+  if (!id || typeof id !== "string") {
+    return notFound();
+  }
+
+  const configuration = await db.configuration.findUnique({
+    where: {
+      id,
+    },
+  });
+
+  if (!configuration) {
+    return notFound();
+  }
+
+  const { imageUrl, width, height } = configuration;
+
+  return (
+    <DesignConfigurator
+      configId={configuration.id}
+      imageDimensions={{ width, height }}
+      imageUrl={imageUrl}
+    />
+  );
 };
 
 export default Page;
