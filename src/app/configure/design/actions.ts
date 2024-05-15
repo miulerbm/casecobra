@@ -1,0 +1,34 @@
+"use server";
+
+import { db } from "@/db";
+import {
+  CaseColor,
+  CaseFinish,
+  CaseMaterial,
+  PhoneModel,
+} from "@prisma/client";
+
+// Everything in this file is gonna be executed in the sv
+
+export type SaveConfigArgs = {
+  color: CaseColor;
+  finish: CaseFinish;
+  material: CaseMaterial;
+  model: PhoneModel;
+  configId: string;
+};
+
+export async function saveConfig({
+  color,
+  finish,
+  material,
+  model,
+  configId,
+}: SaveConfigArgs) {
+  // This will store the saved custom options (march, texture, etc)
+  // Inside of this function we can write server side code / interact with our db
+  await db.configuration.update({
+    where: { id: configId },
+    data: { color, finish, material, model },
+  });
+}
