@@ -42,5 +42,6 @@ export function constructMetadata({
       creator: "@miulerbm",
     },
     icons,
+    metadataBase: new URL("https://casecobra-woad.vercel.app/"),
   };
 }
