@@ -42,7 +42,7 @@ export async function POST(req: Request) {
       const billingAddress = session.customer_details!.address;
       const shippingAddress = session.shipping_details!.address;
 
-      const updatedOder = await db.order.update({
+      const updatedOrder = await db.order.update({
         where: {
           id: orderId,
         },
@@ -72,13 +72,13 @@ export async function POST(req: Request) {
       });
 
       await resend.emails.send({
-        from: "CaseCobra <miulerbm00@gmail.com>",
+        from: "CaseCobra <hello@joshtriedcoding.com>",
         to: [event.data.object.customer_details.email],
         subject: "Thanks for your order!",
         react: OrderReceivedEmail({
           orderId,
-          orderDate: updatedOder.createdAt.toLocaleDateString(),
-          // @ts-ignore
+          orderDate: updatedOrder.createdAt.toLocaleDateString(),
+          //@ts-ignore
           shippingAddress: {
             name: session.customer_details!.name!,
             city: shippingAddress!.city!,
@@ -91,10 +91,7 @@ export async function POST(req: Request) {
       });
     }
 
-    return NextResponse.json({
-      result: event,
-      ok: true,
-    });
+    return NextResponse.json({ result: event, ok: true });
   } catch (err) {
     console.error(err);
 
